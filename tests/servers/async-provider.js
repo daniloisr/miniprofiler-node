@@ -1,10 +1,10 @@
 'use strict';
 
-module.exports = function(asyncModule) {
+module.exports = function(obj) {
   return {
     name: 'dummy-async',
     handler: function(req, res, next) {
-      asyncModule.asyncFn = function() {
+      obj.asyncFn = function() {
         const timing = req.miniprofiler.startTimeQuery('async', 'dummy call');
 
         return new Promise(resolve => {

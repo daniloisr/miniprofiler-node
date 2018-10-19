@@ -7,7 +7,7 @@ var route = require('koa-route');
 var app = koa();
 
 app.use(miniprofiler.koa());
-app.use(miniprofiler.koa.for(require('../dummy-provider-async.js')(dummyModule)));
+app.use(miniprofiler.koa.for(require('../async-provider.js')(dummyModule)));
 
 app.use(route.get('/', function *(){
   yield dummyModule.asyncFn().then(() => {

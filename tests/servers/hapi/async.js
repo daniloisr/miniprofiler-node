@@ -11,7 +11,7 @@ server.register(miniprofiler.hapi(), (err) => {
   if (err) throw err;
 });
 
-server.register(miniprofiler.hapi.for(require('../dummy-provider-async.js')(dummyModule)), (err) => {
+server.register(miniprofiler.hapi.for(require('../async-provider.js')(dummyModule)), (err) => {
   if (err) throw err;
 });
 

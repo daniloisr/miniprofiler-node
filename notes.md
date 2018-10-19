@@ -5,9 +5,11 @@
   - [x] improve tests descriptions
 - [x] add https://www.npmjs.com/package/asyncctx
 - [x] fix error on 'koa' framework
-- [ ] remove arrow functions and es6 things?
-- [ ] improve name ("concurrency" doesn't seem to be the best name)
-- [ ] rename "dummy-provider-async" to "async-provider"
+- [x] remove arrow functions and es6 things?
+  - not needed, hapi servers are using it
+  - which version of nodejs this lib supports?
+- [x] improve name ("concurrency" doesn't seem to be the best name)
+- [x] rename "dummy-provider-async" to "async-provider"
 
 refs:
 - https://github.com/MiniProfiler/node/pull/4

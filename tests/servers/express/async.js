@@ -7,7 +7,7 @@ var express = require('express');
 var app = express();
 
 app.use(miniprofiler.express());
-app.use(miniprofiler.express.for(require('../dummy-provider-async.js')(dummyModule)));
+app.use(miniprofiler.express.for(require('../async-provider.js')(dummyModule)));
 
 app.get('/', (req, res) => {
 	dummyModule.asyncFn().then(() => {
