@@ -19,9 +19,9 @@ server.route({
   method: 'GET',
   path:'/',
   handler: function(request, reply) {
-    return dummyModule.dummyFn().then(() => {
-      const q = request.query.once ? Promise.resolve() : dummyModule.dummyFn();
-      return q.then(() => reply(request.app.miniprofiler.include()));
+    dummyModule.asyncFn().then(() => {
+      Promise.resolve(request.query.once ? undefined : dummyModule.asyncFn())
+        .then(() => reply(request.app.miniprofiler.include()));
     });
   }
 });

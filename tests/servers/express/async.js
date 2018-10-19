@@ -10,9 +10,9 @@ app.use(miniprofiler.express());
 app.use(miniprofiler.express.for(require('../dummy-provider-async.js')(dummyModule)));
 
 app.get('/', (req, res) => {
-	dummyModule.dummyFn().then(() => {
-		const q = req.query.once ? Promise.resolve() : dummyModule.dummyFn();
-		q.then(() => res.send(res.locals.miniprofiler.include()));
+	dummyModule.asyncFn().then(() => {
+		Promise.resolve(req.query.once ? undefined : dummyModule.asyncFn())
+      .then(() => res.send(res.locals.miniprofiler.include()));
 	});
 });
 

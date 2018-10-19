@@ -4,7 +4,7 @@ module.exports = function(asyncModule) {
   return {
     name: 'dummy-async',
     handler: function(req, res, next) {
-      asyncModule.dummyFn = function() {
+      asyncModule.asyncFn = function() {
         const timing = req.miniprofiler.startTimeQuery('async', 'dummy call');
 
         return new Promise(resolve => {

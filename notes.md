@@ -3,7 +3,11 @@
   - [x] create koa and hapi server
   - [x] share 'asyncModule' object
   - [x] improve tests descriptions
-- [ ] add https://www.npmjs.com/package/asyncctx lib
+- [x] add https://www.npmjs.com/package/asyncctx
+- [x] fix error on 'koa' framework
+- [ ] remove arrow functions and es6 things?
+- [ ] improve name ("concurrency" doesn't seem to be the best name)
+- [ ] rename "dummy-provider-async" to "async-provider"
 
 refs:
 - https://github.com/MiniProfiler/node/pull/4

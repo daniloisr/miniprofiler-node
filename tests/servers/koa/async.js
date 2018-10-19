@@ -11,10 +11,8 @@ app.use(miniprofiler.koa.for(require('../dummy-provider-async.js')(dummyModule))
 
 app.use(route.get('/', function *(){
   yield dummyModule.asyncFn().then(() => {
-    const q = Promise.resolve(this.query.once ? undefined : dummyModule.asyncFn());
-    q.then(() => {
-      this.body = this.state.miniprofiler.include();
-    });
+    return Promise.resolve(this.query.once ? undefined : dummyModule.asyncFn())
+      .then(() => { this.body = this.state.miniprofiler.include(); });
   });
 }));
 
