@@ -16,8 +16,8 @@ app.use(route.get('/', function *(){
 
 app.use(route.get('/inside-step', function *(){
   yield new Promise((resolve, reject) => {
-    this.req.miniprofiler.step('Step 1', (unstep) => {
-      this.req.miniprofiler.timeQuery('custom', 'Sleeping...', setTimeout, () => {
+    miniprofiler.currentExtension().step('Step 1', (unstep) => {
+      miniprofiler.currentExtension().timeQuery('custom', 'Sleeping...', setTimeout, () => {
         this.render('index', { title: 'Hey', message: 'Hello there!' }).then(() => {
           unstep();
           resolve();

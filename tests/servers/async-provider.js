@@ -3,13 +3,13 @@
 module.exports = function(obj) {
   return {
     name: 'dummy-async',
-    handler: function(req, res, next) {
+    handler: function(asyncContext, next) {
       obj.asyncFn = function() {
-        const timing = req.miniprofiler.startTimeQuery('async', 'dummy call');
+        const timing = asyncContext.get().startTimeQuery('async', 'dummy call');
 
         return new Promise(resolve => {
           setTimeout(() => {
-            req.miniprofiler.stopTimeQuery(timing);
+            asyncContext.get().stopTimeQuery(timing);
             resolve();
           }, 25);
         });

@@ -34,8 +34,8 @@ server.route({
   method: 'GET',
   path:'/inside-step',
   handler: function(request, reply) {
-    request.app.miniprofiler.step('Step 1', (unstep) => {
-      request.app.miniprofiler.timeQuery('custom', 'Sleeping...', setTimeout, function() {
+    miniprofiler.currentExtension().step('Step 1', (unstep) => {
+      miniprofiler.currentExtension().timeQuery('custom', 'Sleeping...', setTimeout, function() {
         reply.view('index', { title: 'Hey', message: 'Hello there!' });
         unstep();
       }, 50);

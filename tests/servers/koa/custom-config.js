@@ -18,7 +18,7 @@ miniprofiler.configure({
 app.use(miniprofiler.koa());
 
 app.use(route.get('/', function *(){
-  this.body = this.state.miniprofiler.include();
+  this.body = miniprofiler.currentExtension().include();
 }));
 
 app.use(route.get('/hidden', function *(){

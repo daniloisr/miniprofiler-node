@@ -20,9 +20,9 @@ server.route({
   method: 'GET',
   path:'/',
   handler: function(request, reply) {
-    request.raw.req.miniprofiler.timeQuery('custom', 'Sleeping...', setTimeout, () => {
-      request.raw.req.miniprofiler.step('Step 1', () => {
-        return reply(request.app.miniprofiler.include());
+    miniprofiler.currentExtension().timeQuery('custom', 'Sleeping...', setTimeout, () => {
+      miniprofiler.currentExtension().step('Step 1', () => {
+        return reply(miniprofiler.currentExtension().include());
       });
     }, 50);
   }

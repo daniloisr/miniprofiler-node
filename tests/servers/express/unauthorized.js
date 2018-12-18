@@ -14,7 +14,7 @@ var options = {
 app.use(miniprofiler.express(options));
 
 app.get('/', (req, res) => {
-	res.send(res.locals.miniprofiler.include());
+	res.send(miniprofiler.currentExtension().include());
 });
 
 module.exports = app;

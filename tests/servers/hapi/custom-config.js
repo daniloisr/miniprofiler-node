@@ -25,7 +25,7 @@ server.route({
   method: 'GET',
   path:'/',
   handler: function(request, reply) {
-    return reply(request.app.miniprofiler.include());
+    return reply(miniprofiler.currentExtension().include());
   }
 });
 

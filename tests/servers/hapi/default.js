@@ -18,7 +18,7 @@ server.route({
   method: 'GET',
   path:'/',
   handler: function(request, reply) {
-    return reply(request.app.miniprofiler.include());
+    return reply(miniprofiler.currentExtension().include());
   }
 });
 
@@ -26,8 +26,8 @@ server.route({
   method: 'GET',
   path:'/step',
   handler: function(request, reply) {
-    request.raw.req.miniprofiler.step('Step', () => {
-      return reply(request.app.miniprofiler.include());
+    miniprofiler.currentExtension().step('Step', () => {
+      return reply(miniprofiler.currentExtension().include());
     });
   }
 });
@@ -36,9 +36,9 @@ server.route({
   method: 'GET',
   path:'/step-two',
   handler: function(request, reply) {
-    request.raw.req.miniprofiler.step('Step 1', () => {
-      request.raw.req.miniprofiler.step('Step 2', () => {
-        return reply(request.app.miniprofiler.include());
+    miniprofiler.currentExtension().step('Step 1', () => {
+      miniprofiler.currentExtension().step('Step 2', () => {
+        return reply(miniprofiler.currentExtension().include());
       });
     });
   }
@@ -51,11 +51,11 @@ server.route({
     var count = 0;
     var finish = () => {
     if (++count == 2)
-      return reply(request.app.miniprofiler.include());
+      return reply(miniprofiler.currentExtension().include());
     };
 
-    request.raw.req.miniprofiler.step('Step 1', finish);
-    request.raw.req.miniprofiler.step('Step 2', finish);
+    miniprofiler.currentExtension().step('Step 1', finish);
+    miniprofiler.currentExtension().step('Step 2', finish);
   }
 });
 
@@ -63,8 +63,8 @@ server.route({
   method: 'GET',
   path:'/js-sleep',
   handler: function(request, reply) {
-    request.raw.req.miniprofiler.timeQuery('custom', 'Sleeping...', setTimeout, () => {
-      return reply(request.app.miniprofiler.include());
+    miniprofiler.currentExtension().timeQuery('custom', 'Sleeping...', setTimeout, () => {
+      return reply(miniprofiler.currentExtension().include());
     }, 50);
   }
 });
@@ -73,10 +73,10 @@ server.route({
   method: 'GET',
   path:'/js-sleep-start-stop',
   handler: function(request, reply) {
-    var timing = request.raw.req.miniprofiler.startTimeQuery('custom', 'Sleeping...');
+    var timing = miniprofiler.currentExtension().startTimeQuery('custom', 'Sleeping...');
     setTimeout(function() {
-      request.raw.req.miniprofiler.stopTimeQuery(timing);
-      return reply(request.app.miniprofiler.include());
+      miniprofiler.currentExtension().stopTimeQuery(timing);
+      return reply(miniprofiler.currentExtension().include());
     }, 50);
   }
 });

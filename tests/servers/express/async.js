@@ -12,7 +12,7 @@ app.use(miniprofiler.express.for(require('../async-provider.js')(dummyModule)));
 app.get('/', (req, res) => {
 	dummyModule.asyncFn().then(() => {
 		Promise.resolve(req.query.once ? undefined : dummyModule.asyncFn())
-      .then(() => res.send(res.locals.miniprofiler.include()));
+      .then(() => res.send(miniprofiler.currentExtension().include()));
 	});
 });
 

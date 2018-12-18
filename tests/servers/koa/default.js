@@ -9,19 +9,19 @@ app.use(miniprofiler.koa());
 app.use(miniprofiler.koa.for(require('../dummy-provider.js')()));
 
 app.use(route.get('/', function *(){
-  this.body = this.state.miniprofiler.include();
+  this.body = miniprofiler.currentExtension().include();
 }));
 
 app.use(route.get('/step', function *(){
-  this.req.miniprofiler.step('Step', () => {
-    this.body = this.state.miniprofiler.include();
+  miniprofiler.currentExtension().step('Step', () => {
+    this.body = miniprofiler.currentExtension().include();
   });
 }));
 
 app.use(route.get('/step-two', function *(){
-  this.req.miniprofiler.step('Step 1', () => {
-    this.req.miniprofiler.step('Step 2', () => {
-      this.body = this.state.miniprofiler.include();
+  miniprofiler.currentExtension().step('Step 1', () => {
+    miniprofiler.currentExtension().step('Step 2', () => {
+      this.body = miniprofiler.currentExtension().include();
     });
   });
 }));
@@ -30,17 +30,17 @@ app.use(route.get('/step-parallel', function *(){
 	var count = 0;
 	var finish = () => {
 		if (++count == 2)
-      this.body = this.state.miniprofiler.include();
+      this.body = miniprofiler.currentExtension().include();
 	};
 
-  this.req.miniprofiler.step('Step 1', finish);
-  this.req.miniprofiler.step('Step 2', finish);
+  miniprofiler.currentExtension().step('Step 1', finish);
+  miniprofiler.currentExtension().step('Step 2', finish);
 }));
 
 app.use(route.get('/js-sleep', function *(){
   yield new Promise((resolve, reject) => {
-    this.req.miniprofiler.timeQuery('custom', 'Sleeping...', setTimeout, () => {
-      this.body = this.state.miniprofiler.include();
+    miniprofiler.currentExtension().timeQuery('custom', 'Sleeping...', setTimeout, () => {
+      this.body = miniprofiler.currentExtension().include();
       resolve();
     }, 50);
   });
@@ -48,10 +48,10 @@ app.use(route.get('/js-sleep', function *(){
 
 app.use(route.get('/js-sleep-start-stop', function *(){
   yield new Promise((resolve, reject) => {
-    var timing = this.req.miniprofiler.startTimeQuery('custom', 'Sleeping...');
+    var timing = miniprofiler.currentExtension().startTimeQuery('custom', 'Sleeping...');
     setTimeout(() => {
-      this.req.miniprofiler.stopTimeQuery(timing);
-      this.body = this.state.miniprofiler.include();
+      miniprofiler.currentExtension().stopTimeQuery(timing);
+      this.body = miniprofiler.currentExtension().include();
       resolve();
     }, 50);
   });

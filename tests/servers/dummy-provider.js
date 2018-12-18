@@ -3,7 +3,7 @@
 module.exports = function() {
   return {
     name: 'dummy',
-    handler: function(req, res, next) {
+    handler: function(_asyncContext, next) {
       next();
     }
   };

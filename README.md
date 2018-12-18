@@ -41,8 +41,8 @@ app.set('view engine', 'pug');
 app.use(miniprofiler.express());
 
 app.get('/', function(req, res) {
-  req.miniprofiler.step('Step 1', function() {
-    req.miniprofiler.step('Step 2', function() {
+  miniprofiler.currentExtension().step('Step 1', function() {
+    miniprofiler.currentExtension().step('Step 2', function() {
       res.render('index');
     });
   });

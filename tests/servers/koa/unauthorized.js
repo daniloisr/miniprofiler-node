@@ -15,7 +15,7 @@ var options = {
 app.use(miniprofiler.koa(options));
 
 app.use(route.get('/', function *(){
-  this.body = this.state.miniprofiler.include();
+  this.body = miniprofiler.currentExtension().include();
 }));
 
 module.exports = app;

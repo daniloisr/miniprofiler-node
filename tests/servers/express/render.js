@@ -14,8 +14,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/inside-step', (req, res) => {
-  req.miniprofiler.step('Step 1', (unstep) => {
-    req.miniprofiler.timeQuery('custom', 'Sleeping...', setTimeout, function() {
+  miniprofiler.currentExtension().step('Step 1', (unstep) => {
+    miniprofiler.currentExtension().timeQuery('custom', 'Sleeping...', setTimeout, function() {
       res.render('index', { title: 'Hey', message: 'Hello there!' });
       unstep();
     }, 50);

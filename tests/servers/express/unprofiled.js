@@ -14,11 +14,11 @@ var options = {
 app.use(miniprofiler.express(options));
 
 app.get('/', (req, res) => {
-	req.miniprofiler.timeQuery('custom', 'Sleeping...', setTimeout, function() {
-    req.miniprofiler.step('Step 1', () => {
-      res.send(res.locals.miniprofiler.include());
+  miniprofiler.currentExtension().timeQuery('custom', 'Sleeping...', setTimeout, function() {
+    miniprofiler.currentExtension().step('Step 1', () => {
+      res.send(miniprofiler.currentExtension().include());
     });
-	}, 50);
+  }, 50);
 });
 
 module.exports = app;

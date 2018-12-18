@@ -12,7 +12,7 @@ app.use(miniprofiler.koa.for(require('../async-provider.js')(dummyModule)));
 app.use(route.get('/', function *(){
   yield dummyModule.asyncFn().then(() => {
     return Promise.resolve(this.query.once ? undefined : dummyModule.asyncFn())
-      .then(() => { this.body = this.state.miniprofiler.include(); });
+      .then(() => { this.body = miniprofiler.currentExtension().include(); });
   });
 }));
 

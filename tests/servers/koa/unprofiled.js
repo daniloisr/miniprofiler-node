@@ -16,9 +16,9 @@ app.use(miniprofiler.koa(options));
 
 app.use(route.get('/', function *(){
   yield new Promise((resolve, reject) => {
-    this.req.miniprofiler.timeQuery('custom', 'Sleeping...', setTimeout, () => {
-      this.req.miniprofiler.step('Step 1', () => {
-        this.body = this.state.miniprofiler.include();
+    miniprofiler.currentExtension().timeQuery('custom', 'Sleeping...', setTimeout, () => {
+      miniprofiler.currentExtension().step('Step 1', () => {
+        this.body = miniprofiler.currentExtension().include();
         resolve();
       });
     }, 50);

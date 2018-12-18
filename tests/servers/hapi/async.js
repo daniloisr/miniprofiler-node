@@ -21,7 +21,7 @@ server.route({
   handler: function(request, reply) {
     dummyModule.asyncFn().then(() => {
       Promise.resolve(request.query.once ? undefined : dummyModule.asyncFn())
-        .then(() => reply(request.app.miniprofiler.include()));
+        .then(() => reply(miniprofiler.currentExtension().include()));
     });
   }
 });

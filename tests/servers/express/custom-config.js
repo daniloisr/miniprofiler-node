@@ -17,7 +17,7 @@ miniprofiler.configure({
 app.use(miniprofiler.express());
 
 app.get('/', (req, res) => {
-	res.send(res.locals.miniprofiler.include());
+	res.send(miniprofiler.currentExtension().include());
 });
 
 app.get('/hidden', (req, res) => {
